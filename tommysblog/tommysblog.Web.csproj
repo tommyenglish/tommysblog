@@ -39,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -115,12 +123,6 @@
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -175,16 +177,61 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508080721071_AddImageProperties.cs" />
+    <Compile Include="Migrations\201508080721071_AddImageProperties.Designer.cs">
+      <DependentUpon>201508080721071_AddImageProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508080730533_ManyToManyPostTag.cs" />
+    <Compile Include="Migrations\201508080730533_ManyToManyPostTag.Designer.cs">
+      <DependentUpon>201508080730533_ManyToManyPostTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508080733424_BlogPostIdToInt.cs" />
+    <Compile Include="Migrations\201508080733424_BlogPostIdToInt.Designer.cs">
+      <DependentUpon>201508080733424_BlogPostIdToInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508080741519_StringLengths.cs" />
+    <Compile Include="Migrations\201508080741519_StringLengths.Designer.cs">
+      <DependentUpon>201508080741519_StringLengths.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508090325053_MoreColumnTweaks.cs" />
+    <Compile Include="Migrations\201508090325053_MoreColumnTweaks.Designer.cs">
+      <DependentUpon>201508090325053_MoreColumnTweaks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508090327376_UrlSlug.cs" />
+    <Compile Include="Migrations\201508090327376_UrlSlug.Designer.cs">
+      <DependentUpon>201508090327376_UrlSlug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508090536049_sdfasdf.cs" />
+    <Compile Include="Migrations\201508090536049_sdfasdf.Designer.cs">
+      <DependentUpon>201508090536049_sdfasdf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="ViewModels\PostViewModel.cs" />
+    <Compile Include="ViewModels\TagViewModel.cs" />
+    <Compile Include="_Data\Dataservice.cs" />
+    <Compile Include="_Data\Models\Author.cs" />
+    <Compile Include="_Data\Models\BlogPostContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="_Data\Models\BlogPost.cs" />
+    <Compile Include="_Data\Models\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="_Helpers\UrlBuilder.cs" />
+    <Compile Include="_Services\BlogPostService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\Blog\1-main.jpg" />
+    <Content Include="Content\Images\Blog\2-main.jpg" />
+    <Content Include="Content\Images\Blog\3-main.jpg" />
+    <Content Include="Content\Images\Blog\4-main.jpg" />
+    <Content Include="Content\Images\Blog\5-main.jpg" />
+    <Content Include="Content\Images\Blog\6-main.jpg" />
+    <Content Include="Content\Images\Blog\7-main.jpg" />
     <Content Include="Content\Images\Blog\blog-main.jpg" />
     <Content Include="Content\Images\Blog\featured-1.jpg" />
     <Content Include="Content\Images\Blog\featured-2.jpg" />
@@ -260,6 +307,29 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201508080721071_AddImageProperties.resx">
+      <DependentUpon>201508080721071_AddImageProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508080730533_ManyToManyPostTag.resx">
+      <DependentUpon>201508080730533_ManyToManyPostTag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508080733424_BlogPostIdToInt.resx">
+      <DependentUpon>201508080733424_BlogPostIdToInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508080741519_StringLengths.resx">
+      <DependentUpon>201508080741519_StringLengths.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508090325053_MoreColumnTweaks.resx">
+      <DependentUpon>201508090325053_MoreColumnTweaks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508090327376_UrlSlug.resx">
+      <DependentUpon>201508090327376_UrlSlug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508090536049_sdfasdf.resx">
+      <DependentUpon>201508090536049_sdfasdf.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using tommysblog.Data;
+using tommysblog.Services;
+using tommysblog.ViewModels;
 
 namespace tommysblog.Controllers
 {
@@ -11,7 +14,9 @@ namespace tommysblog.Controllers
         // GET: Blog
         public ActionResult Index()
         {
-            return View();
+            BlogPostService bps = new BlogPostService();
+            IList<PostViewModel> vms = bps.GetBlogPosts(10).Select(p => PostViewModel.FromBlogPost(p)).ToList();
+            return View(vms);
         }
     }
 }

@@ -35,7 +35,7 @@ textarea {
 
 .featured-section {
     padding-top: 30px;
-    padding-left: 25px;
+    padding-left: 10px;
 }
 
 
@@ -52,7 +52,6 @@ textarea {
 }
 .featured-section .featured-thought img {
     width: 100%;
-    opacity: .8;
     -webkit-transition: all 1s ease;
     -moz-transition: all 1s ease;
     -o-transition: all 1s ease;
@@ -82,12 +81,13 @@ textarea {
 
 .recent-section {
     padding-top: 30px;
-    padding-left: 25px;
+    padding-left: 0;
 }
 
 .recent-thought {
-    padding: 0 15px;
+    padding: 0 15px 15px 15px;
     background-color: #fff;
+    margin-bottom: 25px;
 }
 
 .zoomy {
@@ -97,11 +97,11 @@ textarea {
     width: 100%;
 }
 .zoomy img {
-    -webkit-transition: all 1s ease-out;
-    -moz-transition: all 1s ease-out;
-    -ms-transition: all 1s ease-out;
-    -o-transition: all 1s ease-out;
-    transition: all 1s ease-out;
+    -webkit-transition: all .6s ease-out;
+    -moz-transition: all .6s ease-out;
+    -ms-transition: all .6s ease-out;
+    -o-transition: all .6s ease-out;
+    transition: all .6s ease-out;
     width: 100%;
     vertical-align: middle;
 }
@@ -169,8 +169,11 @@ textarea {
 
 
 /* General stuff */
+.post-cat div {
+    padding-right: 5px;
+    display: inline-block;
+}
 .post-cat i {
-    padding-right: 3px;
     color: #333;
 }
 
@@ -197,11 +200,27 @@ textarea {
 .share-wrapper ul li i.fa-google-plus {
     color: #dd4b39;
 }
+
 @media (min-width: 768px) {
+    .featured-section {
+        padding-left: 10px;
+    }
+    .recent-section {
+        padding-left: 25px;
+    }
     .featured-section .img-title {
         font-size: 14px;
         letter-spacing: 1px;
         padding: 20px;
+    }
+    .date-block {
+    padding-right: 0;
+}
+}
+
+@media (min-width: 1024px) {
+    .featured-section .featured-thought img {
+        opacity: .8;
     }
 }
 
@@ -210,9 +229,9 @@ textarea {
 
 
 
-
 .date-block {
     padding-top: 15px;
+    padding-right: 30px;
 }
 .date-info {
   box-shadow: 0 0 4px rgba(0, 0, 0, .8);
@@ -281,4 +300,32 @@ textarea {
   text-align: center;
   padding-bottom: 2px;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+}
+
+
+/* Sidebar*/
+
+.author-block {
+    background-size: cover; 
+    background: url('http://blogex.themebucket.biz/wp-content/uploads/2013/01/sticky1-1000x714.jpg');
+    height: 125px;
+}
+
+.author-img img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 10%;
+    margin-top: 75px;
+    border: solid 4px #fff;
+}
+
+.author-bio {
+    text-align: center;
+}
+.author-bio h3 {
+    margin-top: 5px;
+}
+.author-bio p {
+    padding: 0 10%;
 }

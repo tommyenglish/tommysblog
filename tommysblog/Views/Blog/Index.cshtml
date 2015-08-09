@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IList<tommysblog.ViewModels.PostViewModel>
+@{
     ViewBag.Title = "Blog";
 }
 @*<div class="jumbotron blogtron">
@@ -39,50 +40,74 @@
 <div class="row recent-section">
     <div class="col-lg-8">
         <h2 class="fancy-title">Recent thoughts</h2>
-        <div class="recent-thought">
-            <div class="row">
-                <div class="col-xs-10">
-                    <h3><a href="#">Lemon drops fruitcake soufflé caramels tootsie roll.</a></h3>
-                    <div>
-                        <span class="post-cat">
-                            <i class="fa fa-tags"></i>
-                            <a href="/tags/religion" rel="tag">chocolate</a>
-                            <a href="/tags/religion" rel="tag">peach pie</a>
-                            <a href="/tags/religion" rel="tag">peppermint candy canes</a>
-                        </span>
+        @foreach(var post in Model)
+        {
+            <div class="recent-thought">
+                <div class="row">
+                    <div class="col-sm-10 col-xs-9">
+                        <h3><a href="#">@post.Title</a></h3>
+                        <div class="hidden-xs">
+                            <span class="post-cat">
+                                @foreach(var tag in post.Tags)
+                                { 
+                                    <div><i class="fa fa-tag"></i> <a href="/tags/@tag.Url" rel="tag">@tag.Name</a></div>
+                                }
+                            </span>
+                        </div>
                     </div>
+                    <div class="col-sm-2 col-xs-3 text-center">
+                        <div class="date-block">
+                            <span class="date-info" data-month="@post.LastEditMonth" data-year="@post.LastEditYear">@post.LastEditDay</span>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="col-xs-2 text-center">
-                    <div class="date-block">
-                        <span class="date-info" data-month="July" data-year="2015">13</span>
+                <div class="hidden-sm hidden-md hidden-lg">
+                    <span class="post-cat">
+                        @foreach (var tag in post.Tags)
+                        {
+                            <div><i class="fa fa-tag"></i> <a href="/tags/@tag.Url" rel="tag">@tag.Name</a></div>
+                        }
+                    </span>
+                </div>
+                <div class="zoomy zoomy-in">
+                    <img src="~/Content/Images/Blog/@post.ImageName">
+                </div>
+                <div class="recent-preview">
+                    <p>@post.Synopsis</p>
+                </div>
+                <div class="recent-footer clearfix">
+                    <div class="pull-left">
+                        <div class="share-wrapper">
+                            <ul>
+                                <li><a href="http://www.facebook.com/sharer.php?u=@post.ExternalUrl" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="http://twitter.com/share?url=@post.ExternalUrl" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="http://pinterest.com/pin/create/button/?source_url=@post.ExternalUrl" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Pinterest"><i class="fa fa-pinterest"></i></a></li>
+                                <li><a href="https://plus.google.com/share?url=@post.ExternalUrl" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Google Plus"><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <a href="/blog/@post.Url" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
             </div>
-            <div class="zoomy zoomy-in">
-                <img src="http://lorempixel.com/800/400/people/1">
-            </div>
-            <div class="recent-preview">
-                <p>Chocolate cheesecake chocolate cake pudding jujubes caramels cake topping danish. Cake tiramisu brownie sweet cupcake biscuit macaroon. Jelly beans cake oat cake powder dragée sugar plum icing lemon drops.</p>
-                <p>Sesame snaps dragée candy wafer pie powder wafer sweet roll chocolate cake. Icing icing dragée oat cake fruitcake powder ice cream. Jelly beans sugar plum macaroon bear claw sugar plum fruitcake macaroon cotton candy apple pie.</p>
-            </div>
-            <div class="recent-footer clearfix">
-                <div class="pull-left">
-                    <div class="share-wrapper">
-                        <ul>
-                            <li><a href="http://www.facebook.com/sharer.php?u=" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="http://twitter.com/share?url=" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="http://pinterest.com/pin/create/button/?source_url=" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Pinterest"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="https://plus.google.com/share?url=" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Google Plus"><i class="fa fa-google-plus"></i></a></li>
-                        </ul>
+        }
+
+        </div>
+            <div class="col-lg-4">
+                <div>
+                    <div class="author-block">
+                        <div class="author-img">
+                            <img src="http://www.2035themes.com/blogy/classic/wp-content/uploads/2014/10/ali_2.png">
+                        </div>
                     </div>
-                </div>
-                <div class="pull-right">
-                    <a href="/blog/post123" class="btn btn-primary">Read more</a>
+                    <div class="panel panel-default author-bio">
+                        <div class="panel-body">
+                            <h3>Hi, I'm Tommy!</h3>
+                            <p>sesame snaps dragée candy wafer pie powder wafer sweet roll chocolate cake. icing icing dragée oat cake fruitcake powder ice cream.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-4">
-        sidebar
-    </div>
-</div>
