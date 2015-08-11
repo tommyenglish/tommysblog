@@ -1,0 +1,118 @@
+﻿@model tommysblog.ViewModels.BlogArchivesPageViewModel
+@{
+    ViewBag.Title = "Blog Archive";
+}
+
+<div class="row recent-section">
+    <div><h2 class="fancy-title">Thoughts from @Model.MonthName @Model.Year</h2></div>
+    <div class="col-lg-8">
+        @if (Model.IsFuture)
+        {
+            <h3>A little message from the future.</h3>
+        }
+        else if (Model.PostViewModels.Count() == 0)
+        {
+            <h3>I got nothin'...</h3>
+        }
+        else
+        {
+            foreach (var post in Model.PostViewModels)
+            {
+                <div class="recent-thought">
+                    <div class="row">
+                        <div class="col-sm-10 col-xs-9">
+                            <h3><a href="#">@post.Title</a></h3>
+                            <div class="hidden-xs">
+                                <span class="post-cat">
+                                    @foreach (var tag in post.Tags)
+                                    {
+                                        <div><i class="fa fa-tag"></i> <a href="/tags/@tag.Url" rel="tag">@tag.Name</a></div>
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-3 text-center">
+                            <div class="date-block">
+                                <span class="date-info" data-month="@post.LastEditMonth" data-year="@post.LastEditYear">@post.LastEditDay</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="hidden-sm hidden-md hidden-lg">
+                        <span class="post-cat">
+                            @foreach (var tag in post.Tags)
+                            {
+                                <div><i class="fa fa-tag"></i> <a href="/tags/@tag.Url" rel="tag">@tag.Name</a></div>
+                            }
+                        </span>
+                    </div>
+                    <div class="zoomy zoomy-in">
+                        <img src="~/Content/Images/Blog/@post.ImageName">
+                    </div>
+                    <div class="recent-preview">
+                        <p>@post.Synopsis</p>
+                    </div>
+                    <div class="recent-footer clearfix">
+                        <div class="pull-left">
+                            <div class="share-wrapper">
+                                <ul>
+                                    <li><a href="http://www.facebook.com/sharer.php?u=@post.ExternalUrl" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="http://twitter.com/share?url=@post.ExternalUrl" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="http://pinterest.com/pin/create/button/?source_url=@post.ExternalUrl" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Pinterest"><i class="fa fa-pinterest"></i></a></li>
+                                    <li><a href="https://plus.google.com/share?url=@post.ExternalUrl" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Google Plus"><i class="fa fa-google-plus"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <a href="/blog/@post.Url" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+    <div class="col-lg-4">
+        <div>
+            <div class="author-block" style="background: url('/Content/Images/Blog/me-background-2.jpg') center">
+                <div class="author-img">
+                    <img src="~/Content/Images/Blog/me-1.png">
+                </div>
+            </div>
+            <div class="panel panel-default author-bio">
+                <div class="panel-body">
+                    <h3>Hi, I'm Tommy!</h3>
+                    <p>sesame snaps dragée candy wafer pie powder wafer sweet roll chocolate cake. icing icing dragée oat cake fruitcake powder ice cream.</p>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="archive-block">
+                @foreach (var archiveGroupItem in Model.ArchiveItems.GroupBy(a => a.Year))
+                {
+                    <ul>
+                        <li>
+                            @archiveGroupItem.Key
+                            <ul>
+                                @foreach (var archiveItem in archiveGroupItem)
+                                {
+                                    <li>
+                                        @Html.RouteLink(
+                                            string.Format("{0} ({1})", archiveItem.MonthName, archiveItem.TotalPosts), "",
+                                            new
+                                            {
+                                                controller = "Blog",
+                                                action = "Archive",
+                                                year = archiveItem.Year,
+                                                month = archiveItem.Month
+                                            })
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>

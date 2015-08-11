@@ -207,6 +207,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="ViewModels\BlogPageViewModels.cs" />
     <Compile Include="ViewModels\PostViewModel.cs" />
     <Compile Include="ViewModels\TagViewModel.cs" />
     <Compile Include="_Data\Dataservice.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="_Data\Models\BlogPost.cs" />
+    <Compile Include="_Data\Models\Complex\ArchiveItem.cs" />
     <Compile Include="_Data\Models\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -236,6 +238,8 @@
     <Content Include="Content\Images\Blog\featured-1.jpg" />
     <Content Include="Content\Images\Blog\featured-2.jpg" />
     <Content Include="Content\Images\Blog\featured-3.jpg" />
+    <Content Include="Content\Images\Blog\me-1.png" />
+    <Content Include="Content\Images\Blog\me-background-2.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -297,6 +301,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\Archive.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

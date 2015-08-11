@@ -1,4 +1,4 @@
-﻿@model IList<tommysblog.ViewModels.PostViewModel>
+﻿@model tommysblog.ViewModels.BlogLandingPageViewModel
 @{
     ViewBag.Title = "Blog";
 }
@@ -40,7 +40,7 @@
 <div class="row recent-section">
     <div class="col-lg-8">
         <h2 class="fancy-title">Recent thoughts</h2>
-        @foreach(var post in Model)
+        @foreach (var post in Model.PostViewModels)
         {
             <div class="recent-thought">
                 <div class="row">
@@ -48,8 +48,8 @@
                         <h3><a href="#">@post.Title</a></h3>
                         <div class="hidden-xs">
                             <span class="post-cat">
-                                @foreach(var tag in post.Tags)
-                                { 
+                                @foreach (var tag in post.Tags)
+                                {
                                     <div><i class="fa fa-tag"></i> <a href="/tags/@tag.Url" rel="tag">@tag.Name</a></div>
                                 }
                             </span>
@@ -94,20 +94,48 @@
             </div>
         }
 
-        </div>
-            <div class="col-lg-4">
-                <div>
-                    <div class="author-block">
-                        <div class="author-img">
-                            <img src="http://www.2035themes.com/blogy/classic/wp-content/uploads/2014/10/ali_2.png">
-                        </div>
-                    </div>
-                    <div class="panel panel-default author-bio">
-                        <div class="panel-body">
-                            <h3>Hi, I'm Tommy!</h3>
-                            <p>sesame snaps dragée candy wafer pie powder wafer sweet roll chocolate cake. icing icing dragée oat cake fruitcake powder ice cream.</p>
-                        </div>
-                    </div>
+    </div>
+    <div class="col-lg-4">
+        <div>
+            <div class="author-block" style="background: url('/Content/Images/Blog/me-background-2.jpg') center">
+                <div class="author-img">
+                    <img src="~/Content/Images/Blog/me-1.png">
+                </div>
+            </div>
+            <div class="panel panel-default author-bio">
+                <div class="panel-body">
+                    <h3>Hi, I'm Tommy!</h3>
+                    <p>sesame snaps dragée candy wafer pie powder wafer sweet roll chocolate cake. icing icing dragée oat cake fruitcake powder ice cream.</p>
                 </div>
             </div>
         </div>
+        <div>
+            <div class="archive-block">
+                @foreach (var archiveGroupItem in Model.ArchiveItems.GroupBy(a => a.Year))
+                {
+                    <ul>
+                        <li>
+                            @archiveGroupItem.Key
+                            <ul>
+                                @foreach (var archiveItem in archiveGroupItem)
+                                {
+                                    <li>
+                                        @Html.RouteLink(
+                                            string.Format("{0} ({1})", archiveItem.MonthName, archiveItem.TotalPosts), "",
+                                            new
+                                            {
+                                                controller = "Blog",
+                                                action = "Archive",
+                                                year = archiveItem.Year,
+                                                month = archiveItem.Month
+                                            })
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
