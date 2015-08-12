@@ -1,16 +1,12 @@
-﻿@model tommysblog.ViewModels.BlogArchivesPageViewModel
+﻿@model tommysblog.ViewModels.BlogTagsPageViewModel
 @{
     ViewBag.Title = "Blog Archive";
 }
 
 <div class="row recent-section">
-    <div><h2 class="fancy-title">Thoughts from @Model.MonthName @Model.Year</h2></div>
+    <div><h2 class="fancy-title">Thoughts about @Model.TagName</h2></div>
     <div class="col-lg-8">
-        @if (Model.IsFuture)
-        {
-            <h3>A little message from the future.</h3>
-        }
-        else if (Model.PostViewModels.Count() == 0)
+        @if (Model.PostViewModels.Count() == 0)
         {
             <h3>I got nothin'...</h3>
         }
@@ -27,7 +23,7 @@
             @{ Html.RenderPartial("~/Views/Shared/_AuthorBlock.cshtml"); }
         </div>
         <div>
-            @{ Html.RenderPartial("~/Views/Shared/_ArchiveBlock.cshtml", Model.ArchiveItems); }
+            @{ Html.Partial("~/Views/Shared/_ArchiveBlock.cshtml", Model.ArchiveItems); }
         </div>
 
     </div>

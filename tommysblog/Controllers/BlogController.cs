@@ -17,12 +17,16 @@ namespace tommysblog.Controllers
         public ActionResult Index()
         {
             BlogPostService bps = new BlogPostService();
+            TagService ts = new TagService();
             IList<PostViewModel> postVms = bps.GetBlogPosts().Select(p => PostViewModel.FromBlogPost(p)).ToList();
-            IList<ArchiveItem> archiveItems = bps.GetArchiveDetails().ToList();
+            IList<ArchiveItem> archiveItems = bps.GetArchiveDetails();
+            IList<TagCount> tagCounts = ts.GetTagCounts();
+
             BlogLandingPageViewModel vm = new BlogLandingPageViewModel 
             { 
                 PostViewModels = postVms,
-                ArchiveItems = archiveItems
+                ArchiveItems = archiveItems,
+                TagCounts = tagCounts
             };
 
             return View(vm);
@@ -38,16 +42,39 @@ namespace tommysblog.Controllers
                 year = now.Year;
             }
             BlogPostService bps = new BlogPostService();
+            TagService ts = new TagService();
             IList<PostViewModel> postVms = bps.GetBlogPostsByMonth(month, year).Select(p => PostViewModel.FromBlogPost(p)).ToList();
-            IList<ArchiveItem> archiveItems = bps.GetArchiveDetails().ToList();
-            
+            IList<ArchiveItem> archiveItems = bps.GetArchiveDetails();
+            IList<TagCount> tagCounts = ts.GetTagCounts();
+
             BlogArchivesPageViewModel vm = new BlogArchivesPageViewModel
             {
                 PostViewModels = postVms,
                 ArchiveItems = archiveItems,
+                TagCounts = tagCounts,
                 Year = year,
                 MonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month),
                 IsFuture = now.Year <= year && now.Month < month
+            };
+
+            return View(vm);
+        }
+
+        public ActionResult Tags(string urlSlug)
+        {
+            BlogPostService bps = new BlogPostService();
+            TagService ts = new TagService();
+            IList<PostViewModel> postVms = bps.GetBlogPostsByTag(urlSlug).Select(p => PostViewModel.FromBlogPost(p)).ToList();
+            IList<ArchiveItem> archiveItems = bps.GetArchiveDetails();
+            IList<TagCount> tagCounts = ts.GetTagCounts();
+            string tagName = ts.GetTagNameFromSlug(urlSlug);
+
+            BlogTagsPageViewModel vm = new BlogTagsPageViewModel
+            {
+                PostViewModels = postVms,
+                ArchiveItems = archiveItems,
+                TagCounts = tagCounts,
+                TagName = tagName
             };
 
             return View(vm);

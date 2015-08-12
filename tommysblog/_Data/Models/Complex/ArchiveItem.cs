@@ -15,4 +15,11 @@ namespace tommysblog._Data.Models.Complex
         }
         public int TotalPosts { get; set; }
     }
+
+    public class TagCount
+    {
+        public string TagName { get; set; }
+        public string UrlSlug { get; set; }
+        public int Total { get; set; }
+    }
 }

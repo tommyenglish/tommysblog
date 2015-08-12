@@ -21,7 +21,7 @@ namespace tommysblog.Helpers
 
         public static string GetTagUrl(string tagUrlSlug, bool externalize = false)
         {
-            string url = String.Format("{0}/blog/tag/{1}", externalize ? UrlBuilder.BaseUrl : "", tagUrlSlug);
+            string url = String.Format("{0}/blog/tags/{1}", externalize ? UrlBuilder.BaseUrl : "", tagUrlSlug);
             return url;
         }
     }

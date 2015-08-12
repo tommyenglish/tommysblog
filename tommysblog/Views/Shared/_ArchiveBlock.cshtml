@@ -1,0 +1,29 @@
+﻿@model IList<tommysblog._Data.Models.Complex.ArchiveItem>
+
+<div class="archive-block">
+    @foreach (var archiveGroupItem in Model.GroupBy(a => a.Year))
+    {
+        <ul>
+            <li>
+                @archiveGroupItem.Key
+                <ul>
+                    @foreach (var archiveItem in archiveGroupItem)
+                    {
+                        <li>
+                            @Html.RouteLink(
+                                        string.Format("{0} ({1})", archiveItem.MonthName, archiveItem.TotalPosts), "",
+                                        new
+                                        {
+                                            controller = "Blog",
+                                            action = "Archive",
+                                            year = archiveItem.Year,
+                                            month = archiveItem.Month
+                                        })
+                        </li>
+                    }
+                </ul>
+            </li>
+        </ul>
+    }
+</div>
+

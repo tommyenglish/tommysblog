@@ -62,5 +62,32 @@ namespace tommysblog.Data
                 return query.ToList();
             }
         }
+
+        public IList<TagCount> GetTagCounts()
+        {
+            using (var db = new BlogPostContext())
+            {
+                var query = db.BlogPost
+                    .SelectMany(p => p.Tags)
+                    .GroupBy(t => new { TagName = t.Name, UrlSlug = t.UrlSlug })
+                    .Select(t => new TagCount 
+                    { 
+                        TagName = t.Key.TagName,
+                        UrlSlug = t.Key.UrlSlug,
+                        Total = t.Count()
+                    });
+
+                return query.ToList();
+            }
+        }
+
+        public string GetTagNameFromSlug(string urlSlug)
+        {
+            using (var db = new BlogPostContext())
+            {
+                string tagName = db.Tags.Where(t => t.UrlSlug.Equals(urlSlug)).Select(t => t.Name).SingleOrDefault();
+                return tagName;
+            }
+        }
     }
 }
