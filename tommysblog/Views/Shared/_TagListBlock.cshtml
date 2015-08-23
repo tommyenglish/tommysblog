@@ -1,0 +1,10 @@
+﻿@model IList<tommysblog._Data.Models.Complex.TagCount>
+
+<div class="tag-count-block">
+    @foreach (var tagCountItem in Model)
+    {
+        <span class="tagsize@(tagCountItem.Weight)">
+            <a href="@tagCountItem.Url">@tagCountItem.TagName</a>
+        </span>
+    }
+</div>

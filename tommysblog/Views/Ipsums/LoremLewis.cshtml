@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Lorem Lewis</title>
+</head>
+<body ng-app="ipsumsApp">
+    <div ng-controller="LoremLewisCtrl as lewisCtrl">
+        <h2>CS Lewis Quotes</h2>
+        <button ng-click="lewisCtrl.getQuotes()">Get some quotes</button>
+        <ul>
+            <li ng-repeat="quote in lewisCtrl.vm.quotes">
+                {{quote.Content}}<br/>
+                - {{quote.Source}}
+            </li>
+        </ul>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script src="~/Scripts/app/ipsums.js"></script>
+</body>
+</html>

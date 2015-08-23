@@ -32,6 +32,24 @@ namespace tommysblog.Controllers
             return View(vm);
         }
 
+        public ActionResult BlogPost(string urlSlug)
+        {
+            BlogPostService bps = new BlogPostService();
+            TagService ts = new TagService();
+            PostViewModel postVm = PostViewModel.FromBlogPost(bps.GetBlogPost(urlSlug));
+            IList<ArchiveItem> archiveItems = bps.GetArchiveDetails();
+            IList<TagCount> tagCounts = ts.GetTagCounts();
+
+            BlogPostPageViewModel vm = new BlogPostPageViewModel
+            {
+                PostViewModel = postVm,
+                ArchiveItems = archiveItems,
+                TagCounts = tagCounts
+            };
+
+            return View(vm);
+        }
+
         public ActionResult Archive(int month = 0, int year = 0)
         {
             DateTime now = DateTime.Now;

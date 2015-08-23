@@ -10,15 +10,15 @@
                     @foreach (var archiveItem in archiveGroupItem)
                     {
                         <li>
-                            @Html.RouteLink(
-                                        string.Format("{0} ({1})", archiveItem.MonthName, archiveItem.TotalPosts), "",
-                                        new
-                                        {
-                                            controller = "Blog",
-                                            action = "Archive",
-                                            year = archiveItem.Year,
-                                            month = archiveItem.Month
-                                        })
+                            @Html.RouteLink(string.Format("{0} ({1})", archiveItem.MonthName, archiveItem.TotalPosts), "",
+                                new
+                                {
+                                    controller = "Blog",
+                                    action = "Archive",
+                                    year = archiveItem.Year,
+                                    month = archiveItem.Month
+                                }
+                            )
                         </li>
                     }
                 </ul>

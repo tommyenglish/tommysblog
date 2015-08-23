@@ -52,6 +52,8 @@
         <div>
             @{ Html.RenderPartial("~/Views/Shared/_ArchiveBlock.cshtml", Model.ArchiveItems); }
         </div>
-        
+        <div>
+            @{ Html.RenderPartial("~/Views/Shared/_TagListBlock.cshtml", Model.TagCounts); }
+        </div>
     </div>
 </div>

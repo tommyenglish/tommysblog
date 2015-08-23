@@ -25,6 +25,11 @@ namespace tommysblog.ViewModels
 
         public static PostViewModel FromBlogPost(BlogPost p)
         {
+            if(p == null)
+            {
+                return new PostViewModel();
+            }
+
             bool isUpdated = p.DateUpdated.HasValue;
             string month = isUpdated ? p.DateUpdated.Value.ToString("MMMM") : p.DateCreated.ToString("MMMM");
             string day = isUpdated ? p.DateUpdated.Value.Day.ToString() : p.DateCreated.Day.ToString();

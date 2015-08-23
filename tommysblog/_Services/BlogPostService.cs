@@ -30,6 +30,13 @@ namespace tommysblog.Services
             return blogPosts;
         }
 
+        public BlogPost GetBlogPost(string urlSlug)
+        {
+            var dataservice = new Dataservice();
+            BlogPost blogPost = dataservice.GetBlogPost(urlSlug);
+            return blogPost;
+        }
+
         public IList<ArchiveItem> GetArchiveDetails()
         {
             var dataservice = new Dataservice();

@@ -30,4 +30,11 @@ namespace tommysblog.ViewModels
         public IList<TagCount> TagCounts { get; set; }
         public string TagName { get; set; }
     }
+
+    public class BlogPostPageViewModel
+    {
+        public PostViewModel PostViewModel { get; set; }
+        public IList<ArchiveItem> ArchiveItems { get; set; }
+        public IList<TagCount> TagCounts { get; set; }
+    }
 }

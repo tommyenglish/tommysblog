@@ -328,3 +328,32 @@ textarea {
 .author-bio p {
     padding: 0 10%;
 }
+
+
+/*
+
+    #wrapper {
+    width: 400px;
+    height: 267px;
+    border: 1px solid black;
+    overflow:hidden;
+    position:relative;
+}
+#image {
+    background-image: url('http://i.imgur.com/n9q7jhm.jpg');
+    background-size: 400px 267px;
+    background-position:center;
+    transition: all 1s ease;
+    width:100%;
+    height:100%;
+    transform: scale(1);
+    position:relative;
+    left:0;
+    top:0;
+}
+#wrapper:hover #image {
+    transform: scale(2);
+    -webkit-transform: scale(2);
+
+}
+*/

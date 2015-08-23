@@ -5,7 +5,7 @@ using tommysblog._Data.Models.Complex;
 
 namespace tommysblog.Data
 {
-    public class Dataservice
+    public partial class Dataservice
     {
         public IList<BlogPost> GetBlogPosts(int skip, int take)
         {
@@ -37,6 +37,16 @@ namespace tommysblog.Data
                     .Where(bp => bp.DateCreated >= beginDate && bp.DateCreated <= endDate)
                     .OrderBy(bp => bp.DateCreated);
                 return query.ToList();
+            }
+        }
+
+        public BlogPost GetBlogPost(string urlSlug)
+        {
+            using (var db = new BlogPostContext())
+            {
+                var query = db.BlogPost.Include("Tags").Include("Author")
+                    .Where(bp => bp.UrlSlug.Equals(urlSlug));
+                return query.SingleOrDefault();
             }
         }
 
@@ -75,7 +85,8 @@ namespace tommysblog.Data
                         TagName = t.Key.TagName,
                         UrlSlug = t.Key.UrlSlug,
                         Total = t.Count()
-                    });
+                    })
+                    .OrderBy(t => t.TagName);
 
                 return query.ToList();
             }
